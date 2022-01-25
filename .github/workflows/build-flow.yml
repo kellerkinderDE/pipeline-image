@@ -27,6 +27,7 @@ jobs:
         with:
           base-image: "edbizarro/gitlab-ci-pipeline-php:${{ matrix.php }}"
           image: "kellerkinder/pipeline-image:${{ matrix.php }}"
+        continue-on-error: true
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
         if: ${{ github.event_name == 'push' || steps.baseupdatecheck.outputs.needs-updating == 'true' }}
