@@ -9,12 +9,14 @@ USER root
 
 RUN apt-get update -q \
     && apt-get upgrade -y -q \
-    && apt-get install -y patch
-
-RUN cd /usr/local/bin/ \
+    && apt-get install -y patch \
+    && cd /usr/local/bin/ \
     && rm /usr/local/bin/composer \
     && chmod 755 composer1 composer2 \
     && ln -s composer2 composer \
-    && bash ./cleanup.sh
+    && apt-get autoremove -yq --purge \
+    && apt-get autoclean -yq \
+    && apt-get clean \
+    && rm -rf /var/cache/apt/ /var/lib/apt/lists/* /var/log/* /tmp/* /var/tmp/* /usr/share/doc /usr/share/doc-base /usr/share/groff/* /usr/share/info/* /usr/share/linda/* /usr/share/lintian/overrides/* /usr/share/locale/* /usr/share/man/* /usr/share/locale/* /usr/share/gnome/help/*/* /usr/share/doc/kde/HTML/*/* /usr/share/omf/*/*-*.emf
 
 USER php
