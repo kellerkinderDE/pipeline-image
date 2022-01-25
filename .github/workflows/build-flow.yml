@@ -21,26 +21,26 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-#      - name: Docker Image Update Checker
-#        id: baseupdatecheck
-#        uses: lucacome/docker-image-update-checker@v1.1.0
-#        with:
-#          base-image: "edbizarro/gitlab-ci-pipeline-php:${{ matrix.php }}"
-#          image: "kellerkinder/pipeline-image:${{ matrix.php }}"
+      - name: Docker Image Update Checker
+        id: baseupdatecheck
+        uses: lucacome/docker-image-update-checker@v1.1.0
+        with:
+          base-image: "edbizarro/gitlab-ci-pipeline-php:${{ matrix.php }}"
+          image: "kellerkinder/pipeline-image:${{ matrix.php }}"
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
-#        if: steps.baseupdatecheck.outputs.needs-updating == 'true'
+        if: steps.baseupdatecheck.outputs.needs-updating == 'true'
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
         with:
           driver-opts: network=host
-#        if: steps.baseupdatecheck.outputs.needs-updating == 'true'
+        if: steps.baseupdatecheck.outputs.needs-updating == 'true'
       - name: Login to DockerHub
         uses: docker/login-action@v1
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-#        if: steps.baseupdatecheck.outputs.needs-updating == 'true'
+        if: steps.baseupdatecheck.outputs.needs-updating == 'true'
       - name: Build
         id: docker_build
         uses: docker/build-push-action@v2
@@ -50,12 +50,12 @@ jobs:
           tags: "localhost:5000/kellerkinder/pipeline-image:${{ matrix.php }}"
           build-args: |
             PHP_VERSION=${{ matrix.php }}
-#        if: steps.baseupdatecheck.outputs.needs-updating == 'true'
+        if: steps.baseupdatecheck.outputs.needs-updating == 'true'
       - name: Test
         run: |
           docker buildx imagetools inspect localhost:5000/kellerkinder/pipeline-image:${{ matrix.php }}
           docker run --rm localhost:5000/kellerkinder/pipeline-image:${{ matrix.php }}
-#        if: steps.baseupdatecheck.outputs.needs-updating == 'true'
+        if: steps.baseupdatecheck.outputs.needs-updating == 'true'
       - name: Push
         id: docker_build_push
         uses: docker/build-push-action@v2
@@ -64,4 +64,4 @@ jobs:
           tags: "kellerkinder/pipeline-image:${{ matrix.php }}"
           build-args: |
             PHP_VERSION=${{ matrix.php }}
-#        if: steps.baseupdatecheck.outputs.needs-updating == 'true'
+        if: steps.baseupdatecheck.outputs.needs-updating == 'true'
