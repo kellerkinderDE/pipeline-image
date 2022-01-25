@@ -11,7 +11,7 @@ RUN apt-get update -q \
     && apt-get upgrade -y -q \
     && apt-get install -y patch \
     && cd /usr/local/bin/ \
-    && rm /usr/local/bin/composer \
+    && rm -f /usr/local/bin/composer \
     && chmod 755 composer1 composer2 \
     && ln -s composer2 composer \
     && apt-get autoremove -yq --purge \
