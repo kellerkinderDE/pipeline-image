@@ -12,8 +12,9 @@ RUN apt-get update -q \
     && apt-get install -y patch
 
 RUN cd /usr/local/bin/ \
-    && rm -rf /usr/local/bin/composer \
+    && rm /usr/local/bin/composer \
     && chmod 755 composer1 composer2 \
-    && ln -s composer2 composer
+    && ln -s composer2 composer \
+    && bash ./cleanup.sh
 
 USER php
