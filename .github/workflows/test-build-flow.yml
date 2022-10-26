@@ -1,9 +1,7 @@
-name: ci
+name: test build
 
 on:
-  schedule:
-    - cron: '0 10 * * *' # every day at 10am
-  push:
+  pull_request:
     branches:
       - 'main'
   workflow_dispatch:
@@ -57,13 +55,4 @@ jobs:
         run: |
           docker buildx imagetools inspect localhost:5000/kellerkinder/pipeline-image:${{ matrix.php }}
           docker run --rm localhost:5000/kellerkinder/pipeline-image:${{ matrix.php }}
-        if: ${{ github.event_name == 'pull_request' || github.event_name == 'push' || steps.baseupdatecheck.outputs.needs-updating == 'true' }}
-      - name: Push
-        id: docker_build_push
-        uses: docker/build-push-action@v3.2.0
-        with:
-          push: true
-          tags: "kellerkinder/pipeline-image:${{ matrix.php }}"
-          build-args: |
-            PHP_VERSION=${{ matrix.php }}
         if: ${{ github.event_name == 'pull_request' || github.event_name == 'push' || steps.baseupdatecheck.outputs.needs-updating == 'true' }}
