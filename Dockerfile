@@ -1,6 +1,6 @@
 ARG PHP_VERSION=7.2
 
-FROM edbizarro/gitlab-ci-pipeline-php:$PHP_VERSION
+FROM thecodingmachine/php:$PHP_VERSION-v4-slim-cli
 
 ADD https://getcomposer.org/download/latest-1.x/composer.phar /usr/local/bin/composer1
 ADD https://getcomposer.org/download/latest-2.x/composer.phar /usr/local/bin/composer2
@@ -9,7 +9,7 @@ USER root
 
 RUN apt-get update -q \
     && apt-get upgrade -y -q \
-    && apt-get install -y patch \
+    && apt-get install -y patch rsync\
     && rm -f /usr/local/bin/composer \
     && rm -rf ~/.composer \
     && cd /usr/local/bin/ \

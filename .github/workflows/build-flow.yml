@@ -26,7 +26,7 @@ jobs:
         id: baseupdatecheck
         uses: lucacome/docker-image-update-checker@v1.1.0
         with:
-          base-image: "edbizarro/gitlab-ci-pipeline-php:${{ matrix.php }}"
+          base-image: "thecodingmachine/php:${{ matrix.php }}-v4-slim-cli"
           image: "kellerkinder/pipeline-image:${{ matrix.php }}"
         continue-on-error: true
       - name: Set up QEMU

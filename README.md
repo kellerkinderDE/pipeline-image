@@ -7,10 +7,11 @@
 
 ---
 
-Builds from: [edbizarro/gitlab-ci-pipeline-php](https://github.com/edbizarro/gitlab-ci-pipeline-php)
+Builds from: [thecodingmachine/php](https://github.com/thecodingmachine/docker-images-php) with tag `$PHP_VER-v4-slim-cli`
 
 ## Features
 * Currently we're building the following PHP versions:
+  * PHP 8.1
   * PHP 8.0
   * PHP 7.4
   * PHP 7.3
