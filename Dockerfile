@@ -1,5 +1,4 @@
 ARG PHP_VERSION=7.2
-ARG NODE_VERSION=14
 
 FROM thecodingmachine/php:$PHP_VERSION-v4-slim-cli
 
