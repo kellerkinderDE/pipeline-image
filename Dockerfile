@@ -8,8 +8,10 @@ ADD https://getcomposer.org/download/latest-2.x/composer.phar /usr/local/bin/com
 USER root
 
 RUN apt-get update -q \
+    && curl -sL https://deb.nodesource.com/setup_14.x | sudo bash - \
     && apt-get upgrade -y -q \
-    && apt-get install -y patch rsync\
+    && apt-get install -y patch rsync nodejs \
+    && npm i -g npm \
     && rm -f /usr/local/bin/composer \
     && rm -rf ~/.composer \
     && cd /usr/local/bin/ \

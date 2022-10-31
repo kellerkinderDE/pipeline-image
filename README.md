@@ -16,10 +16,15 @@ Builds from: [thecodingmachine/php](https://github.com/thecodingmachine/docker-i
   * PHP 7.4
   * PHP 7.3
   * PHP 7.2
-* composer v1 (`/usr/local/bin/composer1`)
-* composer v2 (`/usr/local/bin/composer2`)
-  * `/usr/local/bin/composer` is a symbolic link to v2
-* [Patch](https://wiki.ubuntuusers.de/patch/) package
+* Composer
+  * composer v1 (`/usr/local/bin/composer1`)
+  * composer v2 (`/usr/local/bin/composer2`)
+    * `/usr/local/bin/composer` is a symbolic link to v2
+* Additional packages:
+  * [patch](https://wiki.ubuntuusers.de/patch/)
+  * [rsync](https://wiki.ubuntuusers.de/rsync/)
+  * [node-v14](https://wiki.ubuntuusers.de/Node.js/)
+    * Currently installed via apt until [this issue](https://github.com/thecodingmachine/docker-images-php/issues/337) is resolved
 
 ## License
 MIT
