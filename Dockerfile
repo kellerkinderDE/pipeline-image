@@ -1,4 +1,5 @@
 ARG PHP_VERSION=7.2
+ARG NODE_VERSION=14
 
 FROM thecodingmachine/php:$PHP_VERSION-v4-slim-cli
 
@@ -8,10 +9,8 @@ ADD https://getcomposer.org/download/latest-2.x/composer.phar /usr/local/bin/com
 USER root
 
 RUN apt-get update -q \
-    && curl -sL https://deb.nodesource.com/setup_14.x | sudo bash - \
     && apt-get upgrade -y -q \
-    && apt-get install -y patch rsync nodejs \
-    && npm i -g npm \
+    && apt-get install -y patch rsync \
     && rm -f /usr/local/bin/composer \
     && rm -rf ~/.composer \
     && cd /usr/local/bin/ \

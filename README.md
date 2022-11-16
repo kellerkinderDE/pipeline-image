@@ -10,21 +10,23 @@
 Builds from: [thecodingmachine/php](https://github.com/thecodingmachine/docker-images-php) with tag `$PHP_VER-v4-slim-cli`
 
 ## Features
-* Currently we're building the following PHP versions:
+### Currently we're building the following PHP versions:
   * PHP 8.1
   * PHP 8.0
   * PHP 7.4
   * PHP 7.3
   * PHP 7.2
-* Composer
+### Composer
   * composer v1 (`/usr/local/bin/composer1`)
   * composer v2 (`/usr/local/bin/composer2`)
     * `/usr/local/bin/composer` is a symbolic link to v2
-* Additional packages:
+### Additional packages:
   * [patch](https://wiki.ubuntuusers.de/patch/)
   * [rsync](https://wiki.ubuntuusers.de/rsync/)
-  * [node-v14](https://wiki.ubuntuusers.de/Node.js/)
-    * Currently installed via apt until [this issue](https://github.com/thecodingmachine/docker-images-php/issues/337) is resolved
+### Node
+We create and tag different images with nodes `12`, `14` and `16`.
+
+As a default for the legacy images (without explicit node tag), node in version `14` is used.
 
 ## License
 MIT

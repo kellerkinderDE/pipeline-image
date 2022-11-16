@@ -1,7 +1,9 @@
-name: test build
+name: legacy ci
 
 on:
-  pull_request:
+  schedule:
+    - cron: '0 10 * * *' # every day at 10am
+  push:
     branches:
       - 'main'
   workflow_dispatch:
@@ -17,7 +19,6 @@ jobs:
     strategy:
       matrix:
         php: [ "7.2", "7.3", "7.4", "8.0", "8.1" ]
-        node: [ "12", "14", "16" ]
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -26,7 +27,7 @@ jobs:
         uses: lucacome/docker-image-update-checker@v1.1.0
         with:
           base-image: "thecodingmachine/php:${{ matrix.php }}-v4-slim-cli"
-          image: "kellerkinder/pipeline-image:PHP_${{ matrix.php }}-NODE_${{ matrix.node }}"
+          image: "kellerkinder/pipeline-image:${{ matrix.php }}"
         continue-on-error: true
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2.1.0
@@ -48,13 +49,21 @@ jobs:
         with:
           context: .
           push: true
-          tags: "localhost:5000/kellerkinder/pipeline-image:PHP_${{ matrix.php }}-NODE_${{ matrix.node }}"
+          tags: "localhost:5000/kellerkinder/pipeline-image:${{ matrix.php }}"
           build-args: |
             PHP_VERSION=${{ matrix.php }}
-            NODE_VERSION=${{ matrix.node }}
         if: ${{ github.event_name == 'pull_request' || github.event_name == 'push' || steps.baseupdatecheck.outputs.needs-updating == 'true' }}
       - name: Test
         run: |
-          docker buildx imagetools inspect localhost:5000/kellerkinder/pipeline-image:PHP_${{ matrix.php }}-NODE_${{ matrix.node }}
-          docker run --rm localhost:5000/kellerkinder/pipeline-image:PHP_${{ matrix.php }}-NODE_${{ matrix.node }}
+          docker buildx imagetools inspect localhost:5000/kellerkinder/pipeline-image:${{ matrix.php }}
+          docker run --rm localhost:5000/kellerkinder/pipeline-image:${{ matrix.php }}
+        if: ${{ github.event_name == 'pull_request' || github.event_name == 'push' || steps.baseupdatecheck.outputs.needs-updating == 'true' }}
+      - name: Push
+        id: docker_build_push
+        uses: docker/build-push-action@v3.2.0
+        with:
+          push: true
+          tags: "kellerkinder/pipeline-image:${{ matrix.php }}"
+          build-args: |
+            PHP_VERSION=${{ matrix.php }}
         if: ${{ github.event_name == 'pull_request' || github.event_name == 'push' || steps.baseupdatecheck.outputs.needs-updating == 'true' }}
