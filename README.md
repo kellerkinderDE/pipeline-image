@@ -17,7 +17,7 @@ Builds from: [thecodingmachine/php](https://github.com/thecodingmachine/docker-i
 * PHP 7.3
 * PHP 7.2
 
-#### With this extensions
+#### With these extensions:
 * intl
 
 ### Composer
