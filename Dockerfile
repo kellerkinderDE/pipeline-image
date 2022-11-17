@@ -1,5 +1,6 @@
 ARG PHP_VERSION=7.2
 ARG NODE_VERSION=14
+ARG PHP_EXTENSIONS="intl"
 
 FROM thecodingmachine/php:$PHP_VERSION-v4-slim-cli
 
