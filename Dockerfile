@@ -11,7 +11,7 @@ USER root
 
 RUN apt-get update -q \
     && apt-get upgrade -y -q \
-    && apt-get install -y patch rsync \
+    && apt-get install -y patch rsync make \
     && rm -f /usr/local/bin/composer \
     && rm -rf ~/.composer \
     && cd /usr/local/bin/ \
