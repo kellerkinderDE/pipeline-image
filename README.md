@@ -29,6 +29,7 @@ Builds from: [thecodingmachine/php](https://github.com/thecodingmachine/docker-i
   * [patch](https://wiki.ubuntuusers.de/patch/)
   * [rsync](https://wiki.ubuntuusers.de/rsync/)
   * [make](https://wiki.ubuntuusers.de/Makefile/)
+  * [jq](https://wiki.ubuntuusers.de/jq/)
 
 ### Node
 We create and tag different images with nodes `12`, `14` and `16`.
