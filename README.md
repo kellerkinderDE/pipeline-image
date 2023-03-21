@@ -11,6 +11,7 @@ Builds from: [thecodingmachine/php](https://github.com/thecodingmachine/docker-i
 
 ## Features
 ### Currently we're building the following PHP versions:
+* PHP 8.2
 * PHP 8.1
 * PHP 8.0
 * PHP 7.4
@@ -32,7 +33,7 @@ Builds from: [thecodingmachine/php](https://github.com/thecodingmachine/docker-i
   * [jq](https://wiki.ubuntuusers.de/jq/)
 
 ### Node
-We create and tag different images with nodes `12`, `14` and `16`.
+We create and tag different images with nodes `12`, `14`, `16` and `18`.
 
 As a default for the legacy images (without explicit node tag), node in version `14` is used.
 
