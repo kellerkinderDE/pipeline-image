@@ -38,7 +38,7 @@ We create and tag different images with nodes `12`, `14`, `16` and `18`.
 As a default for the legacy images (without explicit node tag), node in version `14` is used.
 
 #### Note
-- When working with node 18, you have to set NPM_CONFIG_ENGINE_STRICT to 'false' in build-js jobs (drirectly in .gitlab-ci.yaml):
+If your package.json requires a specific NPM version, you may have to set NPM_CONFIG_ENGINE_STRICT to 'false'  to get NodeJS to ignore that. Usually (e.g. with Shopware) it should still work flawlessly.
 ```
 .build-js: &build-js
   stage: build-js
