@@ -37,5 +37,17 @@ We create and tag different images with nodes `12`, `14`, `16` and `18`.
 
 As a default for the legacy images (without explicit node tag), node in version `14` is used.
 
+#### Note
+- When working with node 18, you have to set NPM_CONFIG_ENGINE_STRICT to 'false' in build-js jobs (drirectly in .gitlab-ci.yaml):
+```
+.build-js: &build-js
+  stage: build-js
+  image: "kellerkinder/pipeline-image:PHP_8.1-NODE_18"
+  variables:
+    DATABASE_URL: ''
+    SHOPWARE_SKIP_BUNDLE_DUMP: '1'
+    NPM_CONFIG_ENGINE_STRICT: 'false'
+```
+
 ## License
 MIT
